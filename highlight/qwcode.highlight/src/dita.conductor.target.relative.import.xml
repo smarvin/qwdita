@@ -1,0 +1,17 @@
+<project name="qwcode.highlight">
+
+<dirname 
+	property="qwcode.highlight.dir" 
+	file="${ant.file.qwcode.highlight}"/>
+	
+<property name="highlight.config.absolutePath" location="${qwcode.highlight.dir}${file.separator}..${file.separator}lib${file.separator}highlighters${file.separator}xslthl-config.xml" />	
+<property name="highlight.config.fileUrl" value="file:///${highlight.config.absolutePath}" />	
+	
+	
+<target name="copy-highlight-css">
+	<copy todir="${output.dir}" file="${qwcode.highlight.dir}${file.separator}qwcode.highlight.css"/>
+</target>
+
+	
+	
+</project>

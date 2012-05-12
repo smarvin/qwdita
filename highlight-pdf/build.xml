@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="qwcode.dita.ot.demo.highlight-pdf" default=""
+	xmlns:au="antlib:org.apache.ant.antunit" xmlns="antlib:org.apache.tools.ant">
+	  	
+	<property name="dita.home" value="..\DITA-OT1.5"/>
+		
+	<target name="remove">
+	    <delete dir="${dita.home}\demo\fo\Customization\fo\xsl\qwcode.highlight-pdf" />
+	</target>
+	
+    <target name="install" depends="remove">
+		<copy todir="${dita.home}\demo\fo\Customization\fo\xsl\qwcode.highlight-pdf">
+		    <fileset dir="qwcode.highlight-pdf">
+				<exclude name="**/demo/temp/*"/>
+			    <exclude name="**/demo/xhtml/*"/>		    			    	
+		    </fileset>
+	    </copy>   	
+    </target>	
+	
+	<target name="buildDemo">
+		<ant dir="${dita.home}\demo\fo\Customization\fo\xsl\qwcode.highlight-pdf" antfile="build.xml" target="buildDemo"/>
+	</target>
+
+	
+	<target name="zip">
+		<input message="Version:" addproperty="dist.version" />
+		<zip 
+			destfile="dist\qwcode.dita.ot.plugins.highlight-pdf.${dist.version}.zip"
+			basedir="."
+			includes="qwcode.highlight-pdf/**"
+		/>
+	</target>
+	
+</project>

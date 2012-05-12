@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="dita.ot.plugins.highlight-js" xml:lang="en-us">
+	<title>Dita-OT Plugin: Highlight</title>
+	<body>
+		<p>
+				This plugin for the
+				<xref  format="html" href="http://sourceforge.net/projects/dita-ot">Dita Open Toolkit (Dita-OT)</xref>
+				highlights source code in codeblock elements for xhtml output
+				using the
+				<xref  format="html" href="http://sourceforge.net/projects/xslthl xslthl">Xslthl</xref>
+				package.		
+		</p>	
+		<p>
+			<image outputclass="bodyImages"
+				href="/images/qwcode.dita.ot.plugins.highlight.png"></image>
+		</p>
+		<p>
+			The plugin highlights the languages supported by xslthl, 
+			which is currently: Java, ini files, PHP, Pascal/Delphi, Modula 2, XML/Xhtml, C, C#, Tcl, Perl, Python, Ruby, Javascript, C++.
+			By default, xslthl does not provide a color scheme for highlighting.  
+			I chose to implement this plugin using the scheme using by the <xref href="http://eclipse.org" format="html">Eclipse Java Editor</xref>.
+		</p>
+		
+		<p>  
+			The latest version of the plugin is only tested with v1.4.3 of the Dita-OT.			 
+		</p>
+		
+		<p>
+			Downloads, Issue Tracking, Release Notes and Revision Control are maintained at the 
+			<xref href="http://code.google.com/p/qwcode-dita-ot-plugins-highlight/" format="html">Google Code Project Page</xref>.					
+		</p>
+
+
+		<section>
+			<title>Installing the Plugin</title>
+			<p>
+				Unpack the zip file and copy the "qwcode.highlight" dir
+				into the plugins (or demo) dir of your Dita-OT installation.
+				If the Ant target you're using to build your docs is not dependent
+				upon the "integrate' target, you'll need to run the following from
+				the root of your Dita-OT installation
+			</p>
+			<p>
+				<codeblock outputclass="prettyprint">ant -f integrator.xml</codeblock>
+			</p>
+		</section>
+
+
+		<section>
+			<title>Building The Demo</title>
+			<p>
+				To build the demo, run the following from the qwcode.highlight
+				plugin directory (after it's installed).
+				It's assumed here that your dita-ot environment is set up properly.
+			</p>
+			<p>	
+				<codeblock outputclass="prettyprint">ant buildDemo</codeblock>
+			</p>
+			<p>
+				The files in qwcode.highlight/demo/dita will be transformed to
+				qwcode.highlight/demo/xhtml.
+				The source code in the demo comes from the <xref format="html" href="http://xslthl.svn.sourceforge.net/viewvc/xslthl/trunk/xslthl/examples/sources/">xslthl svn repository</xref>.				
+			</p>
+		</section>
+
+
+		<section>
+			<title>Highlighting codeblock elements</title>
+			<p>
+				The plugin supports highlighting source code in codeblock elements.  
+				Use the outputclass attribute to specify the language being highlighted. 
+				The value would be one of the following: xml,java, delphi, pascal, ini, php, xml, m2, tcl, c, cpp, csharp, python, ruby, perl, javascript. 
+				In most cases, you will want to surround your source with a CDATA tag like below to prevent interference with the XML Parsing:
+			</p>
+			<p>
+				<codeblock outputclass="prettyprint"><![CDATA[
+<codeblock outputclass="xml">
+   	<![CDATA[ 
+         <someelement>
+            <someotherelement />
+         </someelement>
+   	\]\]>
+</codeblock>]]></codeblock>
+			</p>
+		</section>
+
+		<section>
+			<title>Changing the color scheme</title>
+			<p>
+				If you'd prefer an alternative color scheme or styling, you can
+				modify the stylesheet before or after building your documentation.								
+				<ul>
+					<li>Before Building: modify
+						{ditadir}/plugins/qwcode.highlight/src/qwcode.highlight.css</li>
+					<li>After Building: modify
+						{outputdir}/qwcode.highlight.css</li>
+				</ul>
+			</p>
+		</section>
+
+		<section>
+			<title>Changing how languages are highlighted or creating new highlighters</title>
+			<p>
+				See the <xref format="html" href="http://xslthl.wiki.sourceforge.net/Syntax+Highlighters">xslthl documentation</xref>.
+			</p>
+		</section>
+		
+	</body>
+</topic>
+

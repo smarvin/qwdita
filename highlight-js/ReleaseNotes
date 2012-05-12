@@ -1,0 +1,5 @@
+ * 1.1
+   * stopped using jquery to call prettyPrint(); jquery was a 50kb import
+
+ * 1.0
+   * Initial release

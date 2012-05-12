@@ -1,0 +1,3 @@
+<project>
+<import file="dita.conductor.target.relative.import.xml"/>
+</project>

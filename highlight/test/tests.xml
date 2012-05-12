@@ -1,0 +1,84 @@
+
+<project name="qwcode.dita.ot.highlight.tests" 	
+	xmlns:au="antlib:org.apache.ant.antunit"
+	xmlns="antlib:org.apache.tools.ant">
+	  	
+	<property name="dita.dir.start" value="..\${dita.home}"/>
+	<echo message="${dita.dir.start}"/>
+	<import file="${dita.dir.start}/integrator.xml"/>	
+	
+	<property name="args.input" value="${dita.dir.start}/plugins/qwcode.highlight/demo/dita/map.ditamap"/>
+	<property name="output.dir" value="testRun/xhtml"/>
+	<property name="dita.temp.dir" value="testRun/temp"/>	     	  	
+   	<property name="transtype" value="xhtml"/>
+	<property name="clean.temp" value="yes"/> 
+	
+	<target name="suiteSetUp">
+	</target>
+
+	<target name="suiteTearDown">
+	</target>
+	
+	<target name="setUp">		
+		<mkdir dir="testRun"/>
+		<antcall target="integrate"/>		
+	</target>
+
+	<target name="tearDown">
+		<sleep seconds="2" />
+		<delete dir="testRun"/>		
+	</target>	
+	
+	<target name="checkFilesExist">
+		<au:assertFileExists file="testRun/xhtml/subdir/example-c.html"/>
+		<au:assertFileExists file="testRun/xhtml/subdir/example-cpp.html"/>
+		<au:assertFileExists file="testRun/xhtml/subdir/example-csharp.html"/>
+		<au:assertFileExists file="testRun/xhtml/example-xml.html"/>
+		<au:assertFileExists file="testRun/xhtml/example-delphi.html"/>
+		<au:assertFileExists file="testRun/xhtml/example-ini.html"/>
+		<au:assertFileExists file="testRun/xhtml/example-java.html"/>
+		<au:assertFileExists file="testRun/xhtml/example-javascript.html"/>
+		<au:assertFileExists file="testRun/xhtml/example-m2.html"/>
+		<au:assertFileExists file="testRun/xhtml/example-perl.html"/>
+		<au:assertFileExists file="testRun/xhtml/example-php.html"/>
+		<au:assertFileExists file="testRun/xhtml/example-python.html"/>
+		<au:assertFileExists file="testRun/xhtml/example-ruby.html"/>
+		<au:assertFileExists file="testRun/xhtml/example-tcl.html"/>			
+	</target>
+
+	<target name="checkFileContent">
+		<loadfile property="filetext"
+		      srcFile="testRun/xhtml/subdir/example-cpp.html"/>
+		<au:assertMatches string="${filetext}" pattern="xslthl-directive" 
+		                     casesensitive="false"/>						
+	</target>		
+
+	
+	<target name="testSaxon9">			
+		<ant antfile="${dita.dir.start}/build.xml" target="init" >
+			<property name="dita.dir" value="${dita.dir.start}"/>
+		</ant>
+		<antcall target="checkFilesExist"/>
+		<antcall target="checkFileContent"/>
+	</target>
+
+
+	<target name="testDitaDirRelative">			
+		<ant antfile="${dita.dir.start}/build.xml" target="init">
+			<property name="dita.dir" value="${dita.dir.start}"/>
+		</ant>
+		<antcall target="checkFilesExist"/>
+		<antcall target="checkFileContent"/>						
+	</target>
+
+	<target name="testDitaDirAbsolute">
+		<ant antfile="${dita.dir.start}/build.xml" target="init">
+			<property name="dita.dir" location="${dita.dir.start}"/>
+		</ant>
+		<antcall target="checkFilesExist"/>
+		<antcall target="checkFileContent"/>		
+	</target>
+
+	
+  
+</project>

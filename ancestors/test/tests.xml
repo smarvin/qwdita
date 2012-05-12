@@ -1,0 +1,111 @@
+<project name="qwcode.dita.ot.plugins.ancestors.tests"  
+        xmlns:au="antlib:org.apache.ant.antunit"
+        xmlns="antlib:org.apache.tools.ant">
+
+    	<property name="dita.dir" value="..\${dita.home}"/>
+    	<import file="${dita.dir}/integrator.xml"/>        
+       
+        <property name="args.input" value="../qwcode.ancestors/demo/dita/map.ditamap"/>
+        <property name="output.dir" value="testRun/xhtml"/>
+        <property name="dita.temp.dir" value="testRun/temp"/>                  
+        <property name="transtype" value="xhtml"/>
+        <property name="clean.temp" value="yes"/>
+       
+        <target name="suiteSetUp">
+                <antcall target="integrate"/>
+        </target>
+
+       
+        <target name="setUp">
+                <delete dir="testRun"/>        
+                <mkdir dir="testRun"/>
+                <property name="ancestors.doAncestors" value="yes"/>
+                <property name="ancestors.includeLinkToIndexAsRootAncestor" value="yes"/>
+                <property name="ancestors.indexLinkText" value="Index"/>                        
+                <property name="ancestors.ancestorSeperator" value=" &gt; "/>
+                <property name="ancestors.includePrevNextLinks" value="no"/>            
+                <property name="ancestors.includeTitleInTrail" value="no"/>                            
+               
+        </target>
+
+        <target name="testDefaults">
+                <ant antfile="${dita.dir}/build.xml" target="init" />
+                <au:assertFilesMatch
+                        expected="expectedOutputs/testDefaults.html"
+                        actual="testRun/xhtml/sec1.3.html"/>
+        </target>
+       
+        <target name="testTurnedOff">                  
+                <ant antfile="${dita.dir}/build.xml" target="init">
+                        <property name="ancestors.doAncestors" value="no"/>
+                </ant>
+                <loadfile property="filetext"
+                      srcFile="testRun/xhtml/sec1.3.html"/>
+                <au:assertDoesntMatch string="${filetext}" pattern="&lt;div class=&quot;breadcrumb&quot;&gt;"
+                                     casesensitive="false"/>                            
+        </target>
+
+
+        <target name="testNoLinkToIndex">
+                                               
+                <ant antfile="${dita.dir}/build.xml" target="init">
+                        <property name="ancestors.includeLinkToIndexAsRootAncestor" value="no"/>
+                </ant>
+                <loadfile property="filetext"
+                      srcFile="testRun/xhtml/sec1.3.html"/>
+                <au:assertDoesntMatch string="${filetext}" pattern="&lt;a href=&quot;index.html&quot; title=&quot;Index&quot;&gt;"
+                                     casesensitive="false"/>                            
+        </target>      
+
+       
+        <target name="testIndexLinkText">
+                                               
+                <ant antfile="${dita.dir}/build.xml" target="init">
+                        <property name="ancestors.indexLinkText" value="YoYoYoYo"/>
+                </ant>
+                <loadfile property="filetext"
+                      srcFile="testRun/xhtml/sec1.3.html"/>
+                <au:assertMatches string="${filetext}" pattern="YoYoYoYo"
+                                     casesensitive="false"/>                            
+        </target>              
+       
+        <target name="testSeperator">
+                                               
+                <ant antfile="${dita.dir}/build.xml" target="init">
+                        <property name="ancestors.ancestorSeperator" value="YOYOYOYO"/>
+                </ant>
+                <loadfile property="filetext"
+                      srcFile="testRun/xhtml/sec1.3.html"/>
+                <au:assertMatches string="${filetext}" pattern="YOYOYOYO"
+                                     casesensitive="false"/>                            
+        </target>              
+
+        <target name="testIncludePrevNexLinks">
+                                               
+                <ant antfile="${dita.dir}/build.xml" target="init">
+                        <property name="ancestors.includePrevNextLinks" value="yes"/>
+                </ant>
+                <loadfile property="filetext"
+                      srcFile="testRun/xhtml/sec1.3.html"/>
+                <au:assertMatches string="${filetext}" pattern="Previous topic&lt;/a&gt; |"
+                                     casesensitive="false"/>                            
+        </target>                      
+
+        <target name="testIncludeTitleInTrail">
+                                               
+                <ant antfile="${dita.dir}/build.xml" target="init">
+                        <property name="ancestors.includeTitleInTrail" value="yes"/>
+                </ant>
+                <loadfile property="filetext"
+                      srcFile="testRun/xhtml/sec1.3.html"/>
+                <au:assertMatches string="${filetext}" pattern="gt; Section 1.3"
+                                     casesensitive="false"/>                            
+        </target>                      
+       
+       
+        <target name="tearDown">
+        		<sleep seconds="2" />
+                <delete dir="testRun"/>        
+        </target>
+ 
+</project>

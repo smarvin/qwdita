@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="qwcode.dita.ot.plugins.highlight" default=""
+	xmlns:au="antlib:org.apache.ant.antunit" xmlns="antlib:org.apache.tools.ant">
+	  	
+	<property name="dita.home" value="..\DITA-OT1.5"/>
+		
+	<target name="remove">
+	    <delete dir="${dita.home}\plugins\qwcode.highlight" />
+	</target>
+	
+    <target name="install" depends="remove">
+		<copy todir="${dita.home}\plugins\qwcode.highlight">
+		    <fileset dir="qwcode.highlight">
+				<exclude name="**/demo/temp/*"/>
+			    <exclude name="**/demo/xhtml/*"/>		    			    	
+		    </fileset>
+	    </copy>   	
+    </target>	
+	
+	<target name="buildDemo">
+		<ant dir="${dita.home}\plugins\qwcode.highlight" antfile="build.xml" target="buildDemo"/>
+	</target>
+
+	<target name="buildDoc">
+		<delete dir="qwcode.highlight/doc/xhtml" />
+		<delete dir="qwcode.highlight/doc/temp" />
+		<ant antfile="${dita.home}/build.xml" target="init">
+			<property name="args.input" value="qwcode.highlight/doc/dita/map.ditamap" />
+			<property name="output.dir" value="qwcode.highlight/doc/xhtml" />
+			<property name="dita.temp.dir" value="qwcode.highlight/doc/temp" />
+			<property name="transtype" value="xhtml" />
+			<property name="clean.temp" value="yes" />
+		</ant>
+	</target>	
+	
+	<target name="test">
+		<au:antunit>
+			<file file="test/tests.xml" />
+			<au:plainlistener />
+			<propertyset>
+				<propertyref name="dita.home"/>
+			</propertyset>	
+		</au:antunit>
+	</target>
+	
+	<target name="zip">
+		<input message="Version:" addproperty="dist.version" />
+		<zip 
+			destfile="dist\qwcode.dita.ot.plugins.highlight.${dist.version}.zip"
+			basedir="."
+			includes="qwcode.highlight/**"
+		/>
+	</target>
+	
+</project>

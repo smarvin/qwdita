@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="exampleHighlight" rev="1.0" xml:lang="en-us">
+<title>Dita Highlight Sample</title>
+<body>
+
+<p>This is a Dita topic with some Java source code</p>
+
+<codeblock outputclass="java">
+<![CDATA[
+/**
+ * This is about <code>ClassName</code>.
+ * {@link com.yourCompany.aPackage.Interface}
+ * @author author
+ * @deprecated use <code>OtherClass</code>
+ */
+public class ClassName<E> implements Interface<String> {
+	enum Color { RED, GREEN, BLUE };
+	/* This comment may span multiple lines. */
+	static Object staticField;
+	// This comment may span only this line
+	private E field;
+	// TASK: refactor
+	@SuppressWarnings(value="all")
+	public int foo(Integer parameter) {
+		abstractMethod();
+		int local= 42*hashCode();
+		staticMethod();
+		return bar(local) + parameter;
+]]>
+</codeblock>
+
+</body>
+</topic>

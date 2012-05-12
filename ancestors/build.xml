@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="qwcode.dita.ot.plugins.ancestors" default="" xmlns:au="antlib:org.apache.ant.antunit" xmlns="antlib:org.apache.tools.ant">
+	
+	<property name="dita.home" value="..\DITA-OT1.5"/>	  	
+	
+	<target name="remove">
+	    <delete dir="${dita.home}\plugins\qwcode.ancestors" />
+	</target>
+	
+    <target name="install" depends="remove">
+		<copy todir="${dita.home}\plugins\qwcode.ancestors">
+		    <fileset dir="qwcode.ancestors">
+				<exclude name="**/demo/temp/*"/>
+			    <exclude name="**/demo/xhtml/*"/>		    			    	
+		    </fileset>
+	    </copy>   	
+    </target>	
+	
+	<target name="buildDemo">
+		<ant dir="${dita.home}\plugins\qwcode.ancestors" antfile="build.xml" target="buildDemo"/>
+	</target>
+
+	<target name="test">
+		<au:antunit>
+			<file file="test/tests.xml" />
+			<au:plainlistener />	
+			<propertyset>
+				<propertyref name="dita.home"/>
+			</propertyset>						
+		</au:antunit>
+	</target>	
+	
+	<target name="zip">
+		<input message="Version:" addproperty="dist.version" />
+		<zip 
+			destfile="dist\qwcode.dita.ot.plugins.ancestors.${dist.version}.zip"
+			basedir="."
+			includes="qwcode.ancestors/**"
+		/>
+	</target>
+	
+</project>

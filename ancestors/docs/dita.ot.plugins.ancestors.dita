@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="dita.ot.plugins.ancestors" xml:lang="en-us">
+	<title>Dita-OT Plugin: Ancestors</title>
+	<body>
+		<p>
+				This plugin for the
+				<xref  format="html" href="http://sourceforge.net/projects/dita-ot">Dita Open Toolkit (Dita-OT)</xref>
+				provides "Ancestor Breadcrumbs" for Xhtml output.		
+		</p>	
+		<p>
+			<image outputclass="bodyImages"
+				href="/images/qwcode.dita.ot.plugins.ancestors.png"></image>
+		</p>		
+		<p>  
+			The latest version of the plugin has only been confirmed to work with v1.4.3.			 
+		</p>
+
+		<p>
+			Downloads, Issue Tracking, Release Notes and Revision Control are maintained at the 
+			<xref href="http://code.google.com/p/qwcode-dita-ot-plugins-ancestors/" format="html">Google Code Project Page</xref>.
+					
+		</p>
+
+
+		<section>
+			<title>Installing the Plugin</title>
+			<p>
+				Unpack the zip file and copy the "qwcode.ancestors" dir
+				into the plugins (or demo) dir of your Dita-OT installation.
+				If the Ant target you're using to build your docs is not dependent
+				upon the "integrate' target, you'll need to run the following from
+				the root of your Dita-OT installation
+			</p>
+			<p>
+				<codeblock outputclass="prettyprint">ant -f integrator.xml</codeblock>
+			</p>
+		</section>
+
+		<section>
+			<title>Ant Parameters</title>
+			<p>
+				All of the Ant parameters for the plugin provide useful defaults, so in most cases, you don't need to set any parameters.
+				 You just need to have the plugin installed.
+			</p>
+			<p>
+				<table>
+				<tgroup cols="3">
+				<colspec colname="COLSPEC0" />
+				<colspec colname="COLSPEC1" />
+				<colspec colname="COLSPEC2" />
+				<thead>
+				<row>
+				<entry colname="COLSPEC0" valign="top">Param</entry>
+				<entry colname="COLSPEC1" valign="top">Description</entry>
+				<entry colname="COLSPEC2" valign="top">Default</entry>
+				</row>
+				</thead>
+				<tbody>
+				<row>
+					<entry>ancestors.doAncestors</entry><entry>Whether to produce ancestor links. This allows one to have the plugin installed but still turn off the ancestor links.</entry><entry>yes</entry>
+				</row>
+				<row> 
+					<entry>ancestors.includeLinkToIndexAsRootAncestor</entry><entry>Whether to include a link to the TOC map file as the root in the list of ancestor links</entry><entry>yes</entry>
+				</row>
+				<row> 
+					<entry>ancestors.indexLinkText</entry><entry>The link text for the the link to the TOC map file</entry><entry>Index</entry>
+				</row>
+				<row> 
+					<entry>ancestors.ancestorSeperator</entry><entry>The character(s) seperating the ancestor links.</entry><entry>></entry>
+				</row>
+				<row>
+					<entry>ancestors.includePrevNextLinks</entry><entry>Whether to include "prev/next" links to the left of the ancestor list. Choosing "yes" here and "no" for ancestors.doAncestors will produce nothing</entry><entry>no</entry> 
+				</row>
+				<row>
+					<entry>ancestors.includeTitleInTrail</entry><entry>Whether to add the topic title as the last item in the trail</entry><entry>no</entry> 
+				</row>				
+				</tbody>
+				</tgroup>
+				</table>
+			  </p>
+		</section>
+
+		<section>
+			<title>Building The Demo</title>
+			<p>
+				To build the demo, run the following from the qwcode.ancestors
+				plugin directory (after it's installed).
+				It's assumed here that your dita-ot environment is set up properly.
+			</p>
+			<p>	
+				<codeblock outputclass="prettyprint">ant buildDemo</codeblock>
+			</p>
+			<p>
+				The files in qwcode.ancestors/demo/dita will be transformed to
+				qwcode.ancestors/demo/xhtml.
+			</p>
+		</section>
+
+
+	</body>
+</topic>
+

@@ -1,0 +1,35 @@
+ * 1.2.4
+   * IncludeTitleinTrail not working when topic has no ancestors
+
+ * 1.2.3
+   * fix for this [http://code.google.com/p/qwcode-dita-ot-plugins-ancestors/issues/detail?id=4 bug]
+ 
+ * 1.2.2 
+   * fix for this [http://code.google.com/p/qwcode-dita-ot-plugins-ancestors/issues/detail?id=2 bug]
+
+ * 1.2.1
+   * moved test suite out of plugin dir
+   * added next-match in link-to-other match
+   * corrected some file extensions (from xsl to xml) 
+
+ * 1.2
+   * plugin no longer supported for v1.4.2.1
+     * uses the new v1.5 extension point: dita.preprocess.maplink.param
+     * uses the new v1.5 link-to-other mode in maplinkImpl.xsl
+   * changed the plugin directory name to "qwcode.ancestors"
+
+ * 1.1.2
+   * fixes for Xmetal Users (still works with 1.4.2.1)    
+
+ * 1.1.1
+   * buildDemo now depends on integrate 
+
+ * 1.1
+   * new includeTitleInTrail parameter
+   * new Antunit test suite
+
+ * 1.0.1
+   * topic files can now be in subdirs and have the link to the index work
+
+ * 1.0.0
+   * Initial Release

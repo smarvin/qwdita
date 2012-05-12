@@ -1,0 +1,11 @@
+ * 1.1
+   * use "dita.conductor.target.relative" extension instead of "dita.conductor.target"
+   * match on codeblock class instead of element
+   * call next-match in the "gen-user-styles" override
+   * don't hardwire path locations into the "plugins" dir
+
+ * 1.0.1 
+   * build project id was wrong
+
+ * 1.0
+   * Initial release

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="dita.ot.plugins.highlight-js" xml:lang="en-us">
+	<title>Dita-OT Plugin: Highlight-JS</title>
+	<body>
+		<p>
+				This plugin for the
+				<xref  format="html" href="http://sourceforge.net/projects/dita-ot">Dita Open Toolkit (Dita-OT)</xref>
+				highlights source code in codeblock elements for xhtml output
+				using the
+				<xref  format="html" href="http://code.google.com/p/google-code-prettify/">Prettify</xref>
+				package.		
+		</p>
+		<p>
+			<image outputclass="bodyImages"
+				href="/images/qwcode.dita.ot.plugins.highlight-js.png"></image>
+		</p>
+
+		<p>
+			<xref  format="html" href="http://code.google.com/p/google-code-prettify/">Prettify</xref>
+			highlights all C-like, Bash-like, and XML-like languages.
+		</p>
+		
+		<p>  
+			The latest version of the plugin has been tested with v1.4.3.			 
+		</p>
+
+		<p>
+			Downloads, Issue Tracking, Release Notes and Revision Control are maintained at the 
+			<xref href="http://code.google.com/p/qwcode-dita-ot-plugins-highlight-js/" format="html">Google Code Project Page</xref>.
+					
+		</p>
+
+
+		<section>
+			<title>Installing the Plugin</title>
+			<p>
+				Unpack the zip file and copy the "qwcode.highlight-js" dir
+				into the plugins (or demo) dir of your Dita-OT installation.
+				If the Ant target you're using to build your docs is not dependent
+				upon the "integrate' target, you'll need to run the following from
+				the root of your Dita-OT installation
+			</p>
+			<p>
+				<codeblock outputclass="prettyprint">ant -f integrator.xml</codeblock>
+			</p>
+		</section>
+
+
+		<section>
+			<title>Building The Demo</title>
+			<p>
+				To build the demo, run the following from the qwcode.highlight-js
+				plugin directory (after it's installed).
+				It's assumed here that your dita-ot environment is set up properly.
+			</p>
+			<p>	
+				<codeblock outputclass="prettyprint">ant buildDemo</codeblock>
+			</p>
+			<p>
+				The files in qwcode.highlight-js/demo/dita will be transformed to
+				qwcode.highlight-js/demo/xhtml.
+			</p>
+		</section>
+
+
+		<section>
+			<title>Highlighting codeblock elements</title>
+			<p>
+				To highlight source code in codeblock, set the outputclass to
+				"prettyprint" as in the example below. In most cases, you will want
+				to surround your source with a CDATA tag to prevent interference
+				with the XML Parsing:
+			</p>
+			<p>
+				<codeblock outputclass="prettyprint"><![CDATA[
+<codeblock outputclass="prettyprint">
+   	<![CDATA[ 
+    	   SOURCE CODE GOES HERE...
+   	\]\]>
+</codeblock>]]></codeblock>
+			</p>
+			<p>
+				For some languages, better highlighting is achieved by adding in the
+				language name in addition to "prettyprint". E.g. for python, you
+				could specify the outputclass as "prettyprint lang-py". For details,
+				see
+				<xref format="html" 
+					href="http://google-code-prettify.googlecode.com/svn/trunk/README.html">here</xref>
+			</p>
+		</section>
+
+		<section>
+			<title>Changing the color scheme</title>
+			<p>
+				If you'd prefer an alternative color scheme or styling, you can
+				modify the stylesheet before or after building your documentation.								
+				<ul>
+					<li>Before Building: modify
+						{ditadir}/plugins/qwcode.highlight-js/lib/prettify-2009-01-08/prettify.css</li>
+					<li>After Building: modify
+						{outputdir}/lib/prettify-2009-01-08/prettify.css</li>
+				</ul>
+			</p>
+		</section>
+
+	</body>
+</topic>
+

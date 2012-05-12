@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin id="com.qwcode.dita.ot.plugins.highlight-js">
+
+  <feature extension="dita.conductor.target.relative" 
+  	  value="src/dita.conductor.target.relative.xml" type="file"/>
+  <feature extension="dita.xsl.xhtml"
+      value="src/dita.xsl.xhtml.xsl" type="file"/>
+  <feature extension="depend.preprocess.copy-files.pre" 
+  	  value="copy-highlight-js"/>
+  
+</plugin>

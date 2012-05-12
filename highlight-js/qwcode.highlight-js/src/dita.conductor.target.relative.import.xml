@@ -1,0 +1,15 @@
+<project name="qwcode.highlight-js">
+
+<dirname 
+		property="qwcode.highlight-js.dir" 
+		file="${ant.file.qwcode.highlight-js}"/>
+	
+<target name="copy-highlight-js">
+	<copy todir="${output.dir}/prettify-2009-01-08">
+	    <fileset dir="${qwcode.highlight-js.dir}/../lib/prettify-2009-01-08"/>
+    </copy>
+</target>
+
+	
+	
+</project>
